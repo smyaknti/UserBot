@@ -79,7 +79,7 @@ async def set_afk(afk_e):
         string = str(message[5:])
         global ISAFK
         global AFKREASON
-        await afk_e.edit("AFK AF!")
+        await afk_e.edit("AFK for now! Cya!")
         if string != "":
             AFKREASON = string
         if LOGGER:
