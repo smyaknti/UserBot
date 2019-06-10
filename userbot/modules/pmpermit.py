@@ -16,10 +16,11 @@ from userbot import (COUNT_PM, HELPER, LOGGER, LOGGER_GROUP, NOTIF_OFF,
 from userbot.events import register
 
 # ========================= CONSTANTS ============================
-UNAPPROVED_MSG = ("Bleep blop! This is a bot. Don't fret.\n\n"
-                  "My master hasn't approved you to PM."
-                  " Please wait for my master to look in, he mostly approves PMs.\n\n"
-                  "As far as I know, he doesn't usually approve retards though, hence be patient!.")
+UNAPPROVED_MSG = ("Hey there! This is Alex, a pretty smart bot. Don't fear.\n\n"
+                  "Sir hasn't looked into your PM yet. He is probably working on something, but unless he approves you, I cannot let you through!"
+                  " Please wait for him to look in, he mostly approves PMs.\n\n"
+                  "You can only send a total of 10 messages before my protocols will come into effect!\n"
+                  "A little patience will help! Else I will have to ban you for trying to tresspass his PM! Thanks! 😅")
 # =================================================================
 
 
@@ -59,10 +60,11 @@ async def permitpm(event):
                 else:
                     COUNT_PM[event.chat_id] = COUNT_PM[event.chat_id] + 1
 
-                if COUNT_PM[event.chat_id] > 4:
+                if COUNT_PM[event.chat_id] > 10:
                     await event.respond(
-                        "`You were spamming my master's PM, which I don't like.`"
-                        " `I'mma Report Spam.`"
+                        "`Thats it! You are spamming my master's PM, which I don't like.`"
+                        " `I'mma Report Spam.` 😑"
+                        "\n`There is still hope if my master unblocks you!` 😇"
                     )
 
                     try:
@@ -134,7 +136,7 @@ async def approvepm(apprvpm):
             return
 
         await apprvpm.edit(
-            f"[{name0}](tg://user?id={uid}) `approved to PM!`"
+            f"[{name0}](tg://user?id={uid}) `approved to PM! REJOICE!`"
         )
 
         if LOGGER:
@@ -150,7 +152,7 @@ async def blockpm(block):
     """ For .block command, block people from PMing you! """
     if not block.text[0].isalpha() and block.text[0] not in ("/", "#", "@", "!"):
 
-        await block.edit("`You are gonna be blocked from PM-ing my Master!`")
+        await block.edit("`You are gonna be blocked from PM-ing my Master!` 😤")
 
         if block.reply_to_msg_id:
             reply = await block.get_reply_message()
@@ -185,7 +187,7 @@ async def unblockpm(unblock):
     if not unblock.text[0].isalpha() and unblock.text[0] \
             not in ("/", "#", "@", "!") and unblock.reply_to_msg_id:
 
-        await unblock.edit("`My Master has forgiven you to PM now`")
+        await unblock.edit("`My Master has allowed you to PM now` 😇")
 
         if unblock.reply_to_msg_id:
             reply = await unblock.get_reply_message()

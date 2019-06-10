@@ -23,15 +23,15 @@ async def mention_afk(mention):
         if ISAFK:
             if mention.sender_id not in USERS:
                 await mention.reply(
-                    f"Sorry! My boss is AFK due to `{AFKREASON}`."
-                    "\nWould ping him to look into the message soon 😉."
+                    f"Hey, Alex here! Sorry, Sammy is AFK due to `{AFKREASON}`."
+                    "\nWould ping him to look into the message soon 😅."
                 )
                 USERS.update({mention.sender_id: 1})
                 COUNT_MSG = COUNT_MSG + 1
             elif mention.sender_id in USERS:
                 if USERS[mention.sender_id] % 5 == 0:
                     await mention.reply(
-                        "Sorry! But my boss is still not here."
+                        "Alex again! Sorry, but Sammy is still not here."
                         "\nTry to ping him a little later. I am sorry 😖."
                         f"\nHe told me he was busy with `{AFKREASON}`."
                     )
@@ -52,15 +52,15 @@ async def afk_on_pm(sender):
         if ISAFK:
             if sender.sender_id not in USERS:
                 await sender.reply(
-                    f"Sorry! My boss is AFK due to `{AFKREASON}`."
-                    "\nI'll ping him to look into the message soon 😉."
+                    f"Hey, Alex here! Sorry, Sammy is AFK due to `{AFKREASON}`."
+                    "\nI'll ping him to look into the message soon 😅."
                 )
                 USERS.update({sender.sender_id: 1})
                 COUNT_MSG = COUNT_MSG + 1
             elif sender.sender_id in USERS:
                 if USERS[sender.sender_id] % 5 == 0:
                     await sender.reply(
-                        "Sorry! But my boss is still not here."
+                        "Alex again! Sorry, but Sammy is still not here."
                         "\nTry to ping him a little later. I am sorry 😖."
                         f"\nHe told me he was busy with `{AFKREASON}`."
                     )
@@ -83,7 +83,7 @@ async def set_afk(afk_e):
         if string != "":
             AFKREASON = string
         if LOGGER:
-            await afk_e.client.send_message(LOGGER_GROUP, "You went AFK!")
+            await afk_e.client.send_message(LOGGER_GROUP, "Sir, You went AFK!")
         ISAFK = True
         raise StopPropagation
 
@@ -97,7 +97,7 @@ async def type_afk_is_not_true(notafk):
     global AFKREASON
     if ISAFK:
         ISAFK = False
-        await notafk.respond("I'm no longer AFK.")
+        await notafk.respond("I'm back!")
         afk_info = await notafk.respond(
             "`You recieved "
             + str(COUNT_MSG)
